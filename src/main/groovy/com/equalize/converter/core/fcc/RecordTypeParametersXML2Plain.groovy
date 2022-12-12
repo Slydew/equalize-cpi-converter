@@ -12,6 +12,7 @@ abstract class RecordTypeParametersXML2Plain {
 	public String fixedLengthTooShortHandling
 	public String enclosureSign
 	public String enclosureSignEscape
+	public String selectedFields
 
 	RecordTypeParametersXML2Plain(String fieldSeparator, String[] fixedLengths) {
 		this.fieldSeparator = fieldSeparator
