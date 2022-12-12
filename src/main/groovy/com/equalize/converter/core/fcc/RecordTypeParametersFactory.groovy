@@ -37,6 +37,19 @@ class RecordTypeParametersFactory {
 				throw new ConverterException("Maintain only integers separated by commas for '$fieldFixedLengthsName'")
 			fixedLengths = tempFixedLengths.split(',')
 		}
+		
+		// 3 - SelectedFields
+		String selectedFieldsName = "${recordTypeName}.selectedFields"
+		String tempSelectedFields = param.retrieveProperty(selectedFields, '')
+		String[] selectedFields
+		if (!tempSelectedFields) {
+			selectedFields = null
+		} else {
+			String fieldsWithoutComma = tempSelectedFields.replaceAll(',', '')
+			//if (!containsOnlyDigits(lengthsWithoutComma))
+			//	throw new ConverterException("Maintain only integers separated by commas for '$fieldFixedLengthsName'")
+			fixedLengths = tempSelectedFields.split(',')
+		}
 
 		// Validate the parameter values
 		if (!fieldSeparator && !fixedLengths) {
