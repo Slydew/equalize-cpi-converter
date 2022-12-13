@@ -246,4 +246,16 @@ class XML2DeepPlainConverterSpec extends Specification {
 		expect:
 		process() == this.expectedOutputFile.getText('UTF-8')
 	}
+	def 'XML > Plain - selectedfields with leading space'() {
+		given:
+		this.properties << ['recordsetStructure':'Delivery,Order']
+		this.properties << ['Delivery.fieldFixedLengths':'5,10']
+		this.properties << ['Order.fieldFixedLengths':'5,10']
+		this.properties << ['Order.selectedFields':'OrderNo,DeliveryNo']
+		this.inputFileName = 'XML2DeepPlain_Scenario5.xml'
+		this.outputFileName = 'XML2DeepPlain_Scenario6_output.txt'
+
+		expect:
+		process() == this.expectedOutputFile.getText('UTF-8')
+	}
 }
