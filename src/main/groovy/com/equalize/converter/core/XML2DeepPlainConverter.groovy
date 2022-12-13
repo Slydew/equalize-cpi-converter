@@ -81,17 +81,21 @@ class XML2DeepPlainConverter extends AbstractConverter {
 	}
 
 	private String generateRowTextForElement(XMLElementContainer element) {
-		List<Field> childFields = element.getChildFields()
+		
+		RecordTypeParametersXML2Plain rtp = this.recordTypes.get(segmentName)
+		if (rtp.seledtedFields != null) {
+			List<Field> childFields = rtp.seledtedFields
+		}else{	
+			List<Field> childFields = element.getChildFields()
+		}	
 		String segmentName = element.getElementName()
 		if (!this.recordTypes.containsKey(segmentName)) {
 			throw new ConverterException("Record Type $segmentName not listed in parameter 'recordsetStructure'")
 		}
-
 		RecordTypeParametersXML2Plain rtp = this.recordTypes.get(segmentName)
 		if (rtp.fixedLengths != null) {
 			checkFieldCountConsistency(segmentName, childFields, rtp.fixedLengths.length)
 		}
-
 		return this.plainOut.generateLineText(childFields, rtp.fieldSeparator, rtp.fixedLengths, rtp.endSeparator,
 				rtp.fixedLengthTooShortHandling, rtp.enclosureSign, rtp.enclosureSignEscape)
 	}
