@@ -92,7 +92,7 @@ class XML2DeepPlainConverter extends AbstractConverter {
 		if (!this.recordTypes.containsKey(segmentName)) {
 			throw new ConverterException("Record Type $segmentName not listed in parameter 'recordsetStructure'")
 		}
-		RecordTypeParametersXML2Plain rtp = this.recordTypes.get(segmentName)
+		rtp = this.recordTypes.get(segmentName)
 		if (rtp.fixedLengths != null) {
 			checkFieldCountConsistency(segmentName, childFields, rtp.fixedLengths.length)
 		}
